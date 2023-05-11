@@ -26,6 +26,22 @@ export const TransactionsTable = styled.table`
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
         }
+
+        button {
+            background-color: ${props => props.theme["red-700"]};
+            color: ${props => props.theme["gray-100"]};
+            
+            border: 0;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: ${props => props.theme["red-500"]};
+                color: ${props => props.theme["gray-300"]};
+                transition: all 0.2s;
+            }
+        }
     }
 `
 

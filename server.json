@@ -1,52 +1,20 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "description": "Desenvolvimento de site",
-      "type": "income",
-      "category": "Venda",
-      "price": 12000,
-      "startDate": "2023-01-31T19:34:47.508Z"
-    },
-    {
-      "id": 2,
       "description": "Hamburguer",
-      "type": "outcome",
+      "price": 18,
       "category": "Alimentação",
-      "price": 12,
-      "startDate": "2023-01-31T19:34:47.508Z"
-    },
-    {
-      "description": "Universidade",
-      "price": 1000,
-      "category": "Estudante",
       "type": "outcome",
-      "startDate": "2023-02-01T14:02:17.899Z",
-      "id": 3
+      "startDate": "2023-05-11T17:53:34.069Z",
+      "id": 1
     },
     {
-      "description": "Back-end",
-      "price": 2000,
-      "category": "Desenvolvedor",
+      "description": "FullStack",
+      "price": 4000,
+      "category": "Trabalho",
       "type": "income",
-      "startDate": "2023-02-01T14:07:09.395Z",
-      "id": 4
-    },
-    {
-      "description": "Hapvida",
-      "price": 2500,
-      "category": "Venda",
-      "type": "income",
-      "startDate": "2023-02-02T15:51:03.925Z",
-      "id": 5
-    },
-    {
-      "description": "igor",
-      "price": 20,
-      "category": "2",
-      "type": "income",
-      "startDate": "2023-02-02T16:01:50.210Z",
-      "id": 6
+      "startDate": "2023-05-11T18:12:47.186Z",
+      "id": 2
     }
   ]
 }

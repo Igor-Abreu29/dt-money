@@ -10,7 +10,11 @@ export function Transactions() {
     const transactions = useContextSelector(TransactionsContext, (context) => {
         return context.transactions
     })
-    
+
+    const deleteTransactions = useContextSelector(TransactionsContext, (context) => {
+        return context.deleteTransactions
+    })
+
     return (
         <div>
             <Header />
@@ -32,6 +36,9 @@ export function Transactions() {
                                     </td>
                                     <td>{transaction.category}</td>
                                     <td>{DateFormater.format(new Date(transaction.startDate))}</td>
+                                    <td>
+                                        <button onClick={() => deleteTransactions(transaction.id)}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}
