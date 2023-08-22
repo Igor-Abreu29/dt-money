@@ -1,40 +1,15 @@
-import { SummaryCard, SummaryContainer } from "./styles";
-import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
-import { NumberFormater } from "../../utils/formater";
-import { UseSummary } from "../../hooks/useSummary";
+import { SummaryCard } from "./SummaryCard";
+import { SummaryHeader } from "./SummaryHeader";
+import { SummaryIcon } from "./SummaryIcon";
+import { SummaryRoot } from "./SummaryRoot";
+import { SummaryTitle } from "./SummaryTitle";
+import { SummaryVariantType } from "./SummaryVariantType";
 
-export function Summary() {
-    const summary = UseSummary()
-
-    return (
-        <SummaryContainer>
-            <SummaryCard>
-                <header>
-                    <span>Entradas</span>
-                    <ArrowCircleUp size={32} color="#00b373" />
-                </header>
-
-                <strong>{NumberFormater.format(summary.income)}</strong>
-            </SummaryCard> 
-
-            <SummaryCard>
-
-                <header>
-                    <span>Saídas</span>
-                    <ArrowCircleDown size={32} color="#f75a68" />
-                </header>
-
-                <strong>{NumberFormater.format(summary.outcome)}</strong>
-            </SummaryCard> 
-
-            <SummaryCard variant="green">
-                <header>
-                    <span>Total</span>
-                    <CurrencyDollar size={32} color="#fff" />
-                </header>
-
-                <strong>{NumberFormater.format(summary.total)}</strong>
-            </SummaryCard> 
-        </SummaryContainer>
-    )
+export const Summary = {
+    Root: SummaryRoot,
+    Icon: SummaryIcon,
+    Card: SummaryCard,
+    Header: SummaryHeader,
+    Title: SummaryTitle,
+    VariantType: SummaryVariantType
 }

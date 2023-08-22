@@ -62,12 +62,13 @@ export function NewTransactionModal() {
 
                 <Dialog.Title>Nova Transação</Dialog.Title>
 
-                <form action="" onSubmit={handleSubmit(handleCreateNewTransactions)}>
+                <form onSubmit={handleSubmit(handleCreateNewTransactions)}>
                     <input 
                         type="text" 
                         placeholder='Descrição' 
                         required 
                         {...register('description')}
+                        autoComplete='off'
                     />
 
                     <input 
@@ -75,6 +76,7 @@ export function NewTransactionModal() {
                     placeholder='Preço' 
                     required 
                     {...register('price', {valueAsNumber: true})}
+                    autoComplete='off'
                     />
 
                     <input 
@@ -82,6 +84,7 @@ export function NewTransactionModal() {
                     placeholder='Categoria' 
                     required 
                     {...register('category')}
+                    autoComplete='off'
                     />
 
                     <Controller 

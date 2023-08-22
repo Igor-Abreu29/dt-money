@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header";
-import { Summary } from "../../components/Summary";
+import { SummaryComposition } from "../../components/Summary/SummaryComposition";
 import { TransactionsContext } from "../../contexts/TransactionsContext";
 import { DateFormater, NumberFormater } from "../../utils/formater";
 import { SearchForm } from "./SearchForm";
@@ -18,7 +18,8 @@ export function Transactions() {
     return (
         <div>
             <Header />
-            <Summary />
+
+            <SummaryComposition />
 
             <TransactionsContainer>
             <SearchForm />

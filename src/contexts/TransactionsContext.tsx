@@ -3,7 +3,7 @@ import { createContext } from "use-context-selector";
 import { api } from "../libs/axios";
 
 interface TransactionProps {
-    id: number
+    id: string
     description: string
     type: 'income' | 'outcome'
     price: number
@@ -22,7 +22,7 @@ interface TransactionContextProps {
     transactions: TransactionProps[]
     fetchTransactions: (query?: string) => Promise<void>
     createTransactions: (data: createTransactionInput) => Promise<void>
-    deleteTransactions: (id: number) => Promise<void>
+    deleteTransactions: (id: string) => Promise<void>
 }
 
 interface TransactionProviderProps {
@@ -37,7 +37,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
 
     const fetchTransactions = useCallback(
         async (query?: string) => {
-            const response = await api.get('transactions', {
+            const response = await api.get('/transactions', {
                 params: {
                     _sort: 'startDate',
                     _order: 'desc',
@@ -51,12 +51,11 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     const createTransactions = useCallback(
         async (data: createTransactionInput) => {
 
-        const response = await api.post('transactions', {
+        const response = await api.post('/transactions', {
            description: data.description,
            price: data.price,
            category: data.category,
            type: data.type,
-           startDate: new Date(),
        })
 
        setTransactions(state => [ response.data, ...state])
@@ -64,13 +63,12 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
 )
 
    const deleteTransactions = useCallback(
-        async (id: number) => {
-          await api.delete(`transactions/${id}`)
-          
-          const filterTransactions = transactions.filter(item => item.id !== id)
-          setTransactions(filterTransactions)
+        async (id: string) => {
+            await api.delete(`/transactions/${id}`)
 
-        }, []
+            const filterTransactions = transactions.filter(item => item.id !== id)
+            setTransactions(filterTransactions)
+        }, [transactions]
    ) 
 
     useEffect(() => {
