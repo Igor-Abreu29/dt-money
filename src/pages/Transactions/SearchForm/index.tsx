@@ -13,8 +13,8 @@ const FilterFormSchema = z.object({
 type FilterFormInputs = z.infer<typeof FilterFormSchema>
 
 export function SearchForm() {
-    const fetchTransactions  = useContextSelector(TransactionsContext, (context) => {
-        return context.fetchTransactions
+    const searchTransactions  = useContextSelector(TransactionsContext, (context) => {
+        return context.searchTransactions
     })
 
     const { 
@@ -25,16 +25,17 @@ export function SearchForm() {
         resolver: zodResolver(FilterFormSchema)
     })
 
-    async function handleFilterTransactions(data: FilterFormInputs) {
-        await fetchTransactions(data.query)
+    async function handleFilterTransactions({ query }: FilterFormInputs) {
+        await searchTransactions(query)
     }
 
     return (
         <SearchFormContainer onSubmit={handleSubmit(handleFilterTransactions)}>
             <input 
-            type="text" 
-            placeholder="Busque por transações"
-            {...register('query')}
+                type="text" 
+                placeholder="Busque por transações"
+                autoComplete="off"
+                {...register('query')}
             />
             <button type="submit" disabled={isSubmitting}>
                 <MagnifyingGlass size={20}/>

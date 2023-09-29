@@ -29,7 +29,7 @@ export function SummaryComposition() {
                     <Summary.Title text="Total" />
                     <Summary.Icon icon={CurrencyDollar} color="#fff" />
                 </Summary.Header>
-                <Summary.VariantType variantType={summary.income} />
+                <Summary.VariantType variantType={summary.total} />
             </Summary.Card>
         </Summary.Root>
     )

@@ -23,6 +23,7 @@ interface TransactionContextProps {
     fetchTransactions: (query?: string) => Promise<void>
     createTransactions: (data: createTransactionInput) => Promise<void>
     deleteTransactions: (id: string) => Promise<void>
+    searchTransactions: (query: string) => Promise<void>
 }
 
 interface TransactionProviderProps {
@@ -44,7 +45,20 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
                     q: query,
                 }
             })
-            setTransactions(response.data)
+            setTransactions(response.data.transactions)
+        }, []
+    )
+
+    const searchTransactions = useCallback(
+        async (query: string) => {
+            const response = await api.get('/transactions/search', {
+                params: {
+                    _sort: 'startDate',
+                    _order: 'desc',
+                    q: query
+                }
+            })
+            setTransactions(response.data.transactions)
         }, []
     )
 
@@ -58,7 +72,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
            type: data.type,
        })
 
-       setTransactions(state => [ response.data, ...state])
+       setTransactions(state => [ response.data.transaction, ...state])
    }, []
 )
 
@@ -82,7 +96,8 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
                     transactions, 
                     fetchTransactions, 
                     createTransactions,
-                    deleteTransactions
+                    deleteTransactions,
+                    searchTransactions
                 }
             }
         >
