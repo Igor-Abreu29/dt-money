@@ -1,103 +1,30 @@
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { createContext } from "use-context-selector";
-import { api } from "../libs/axios";
-
-interface TransactionProps {
-    id: string
-    description: string
-    type: 'income' | 'outcome'
-    price: number
-    category: string
-    startDate: string
-}
-
-interface createTransactionInput {
-    description: string
-    price: number
-    category: string
-    type: 'income' | 'outcome'
-}
 
 interface TransactionContextProps {
-    transactions: TransactionProps[]
-    fetchTransactions: (query?: string) => Promise<void>
-    createTransactions: (data: createTransactionInput) => Promise<void>
-    deleteTransactions: (id: string) => Promise<void>
-    searchTransactions: (query: string) => Promise<void>
+    updateSearch: (text: string) => void
+    search: string
 }
 
 interface TransactionProviderProps {
     children: ReactNode
 }
 
-
 export const TransactionsContext = createContext({} as TransactionContextProps)
 
 export function TransactionProvider({ children }: TransactionProviderProps) {
-    const [transactions, setTransactions] = useState<TransactionProps[]>([])
+    const [search, setSearch] = useState<string>('')
 
-    const fetchTransactions = useCallback(
-        async (query?: string) => {
-            const response = await api.get('/transactions', {
-                params: {
-                    _sort: 'startDate',
-                    _order: 'desc',
-                    q: query,
-                }
-            })
-            setTransactions(response.data.transactions)
-        }, []
-    )
-
-    const searchTransactions = useCallback(
-        async (query: string) => {
-            const response = await api.get('/transactions/search', {
-                params: {
-                    _sort: 'startDate',
-                    _order: 'desc',
-                    q: query
-                }
-            })
-            setTransactions(response.data.transactions)
-        }, []
-    )
-
-    const createTransactions = useCallback(
-        async (data: createTransactionInput) => {
-
-        const response = await api.post('/transactions', {
-           description: data.description,
-           price: data.price,
-           category: data.category,
-           type: data.type,
-       })
-
-       setTransactions(state => [ response.data.transaction, ...state])
-   }, []
-)
-
-   const deleteTransactions = useCallback(
-        async (id: string) => {
-            await api.delete(`/transactions/${id}`)
-
-            const filterTransactions = transactions.filter(item => item.id !== id)
-            setTransactions(filterTransactions)
-        }, [transactions]
-   ) 
-
-    useEffect(() => {
-        fetchTransactions()
-    }, [])
+    const updateSearch = (text: string) => {
+        setSearch(text)
+    }
 
     return (
         <TransactionsContext.Provider value=
             {
                 {
-                    transactions, 
-                    fetchTransactions, 
-                    createTransactions,
-                    deleteTransactions,
-                    searchTransactions
+                    search,
+                    updateSearch
                 }
             }
         >
