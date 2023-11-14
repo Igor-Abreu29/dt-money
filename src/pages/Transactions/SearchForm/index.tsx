@@ -13,10 +13,10 @@ const FilterFormSchema = z.object({
 type FilterFormInputs = z.infer<typeof FilterFormSchema>
 
 export function SearchForm() {
-    const searchTransactions  = useContextSelector(TransactionsContext, (context) => {
-        return context.searchTransactions
-    })
-
+    const { updateSearch } = useContextSelector(TransactionsContext, context => {
+        return context
+    }) 
+    
     const { 
         register, 
         handleSubmit,
@@ -26,7 +26,7 @@ export function SearchForm() {
     })
 
     async function handleFilterTransactions({ query }: FilterFormInputs) {
-        await searchTransactions(query)
+        updateSearch(query)
     }
 
     return (
