@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller } from 'react-hook-form'
-import { TransactionsContext } from '../../contexts/TransactionsContext'
-import { useContextSelector } from 'use-context-selector'
+import { useCreateTransaction } from '../../hooks/useCreateTransaction'
 
 const NewTransactionFormModalSchema = z.object({
     description: z.string(),
@@ -18,9 +17,7 @@ const NewTransactionFormModalSchema = z.object({
 type NewTransactionsFormInput = z.infer<typeof NewTransactionFormModalSchema>
 
 export function NewTransactionModal() {
-    const createTransactions = useContextSelector(TransactionsContext, (context) => {
-        return context.createTransactions
-    })
+    const { mutate } = useCreateTransaction()
 
     const { 
         control,
@@ -41,14 +38,13 @@ export function NewTransactionModal() {
     async function handleCreateNewTransactions(data: NewTransactionsFormInput) {
         const { category, description, price, type } = data
 
-        createTransactions({
-            description,
+        mutate({
             category,
+            description,
             price,
-            type,
+            type
         })
         reset()
-        
     }
 
     return (
