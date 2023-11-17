@@ -9,10 +9,6 @@ export const Card = styled.div<SummaryCardProps>`
     border-radius: 8px;
     padding: 2rem;
 
-    header {
-        
-    }
-
     strong {
         display: block;
         margin-top: 1rem;
