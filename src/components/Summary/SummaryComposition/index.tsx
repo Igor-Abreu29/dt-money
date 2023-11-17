@@ -13,7 +13,7 @@ export function SummaryComposition() {
                     <Summary.Title text="Entrada" />
                     <Summary.Icon icon={ArrowCircleUp} color="#00b373" />
                 </Summary.Header>
-                <Summary.VariantType variantType={summary?.income as number} />
+                <Summary.VariantType variantType={summary?.income as number ?? 0} />
             </Summary.Card>
         
             <Summary.Card>
@@ -21,7 +21,7 @@ export function SummaryComposition() {
                     <Summary.Title text="Saída" />
                     <Summary.Icon icon={ArrowCircleDown} color="#f75a68" />
                 </Summary.Header>
-                <Summary.VariantType variantType={summary?.outcome as number} />
+                <Summary.VariantType variantType={summary?.outcome as number ?? 0} />
             </Summary.Card>
 
             <Summary.Card variant="green">
@@ -29,7 +29,7 @@ export function SummaryComposition() {
                     <Summary.Title text="Total" />
                     <Summary.Icon icon={CurrencyDollar} color="#fff" />
                 </Summary.Header>
-                <Summary.VariantType variantType={summary?.total as number} />
+                <Summary.VariantType variantType={summary?.total as number ?? 0} />
             </Summary.Card>
         </Summary.Root>
     )
